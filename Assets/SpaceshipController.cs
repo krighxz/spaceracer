@@ -30,7 +30,7 @@ public class SpaceshipController : NetworkBehaviour {
 		engineBeep = GameObject.Find ("engineBeep").GetComponent<AudioSource> ();
 
 		if (isLocalPlayer) {
-			Camera.main.transform.position = transform.position - new Vector3(0,-5,5);
+			Camera.main.transform.position = transform.position - new Vector3(0,0,0);
 			Camera.main.transform.SetParent(transform);
 		}
 	}
@@ -65,14 +65,15 @@ public class SpaceshipController : NetworkBehaviour {
 				vel = maxVel * -1.0f;
 
 			finalVel = (vel + boostVel * (vel / maxVel));
-
-			engineSound.volume = finalVel / 1000f;
-			engineSound.pitch = finalVel / 200f + 0.5f;
 			transform.Translate (transform.forward * Time.deltaTime * finalVel);
 
-			engineBeep.volume = Mathf.Pow (finalVel / 2500f, 2f);
-			engineBeep.pitch = finalVel / 500f + 0.5f;
-			transform.Translate (transform.forward * Time.deltaTime * finalVel);
+//			engineSound.volume = finalVel / 1000f;
+//			engineSound.pitch = finalVel / 200f + 0.5f;
+//			transform.Translate (transform.forward * Time.deltaTime * finalVel);
+//
+//			engineBeep.volume = Mathf.Pow (finalVel / 2500f, 2f);
+//			engineBeep.pitch = finalVel / 500f + 0.5f;
+//			transform.Translate (transform.forward * Time.deltaTime * finalVel);
 
 			// SIDE MVMT
 
