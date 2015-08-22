@@ -47,8 +47,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\AsteroidGenerator.cs" />
+     <Compile Include="Assets\AsteroidManager.cs" />
      <Compile Include="Assets\BgEnvironmentController.cs" />
      <Compile Include="Assets\CameraEffectController.cs" />
+     <Compile Include="Assets\EnvironmentManager.cs" />
      <Compile Include="Assets\FPSDisplay.cs" />
      <Compile Include="Assets\FreeLook.cs" />
      <Compile Include="Assets\HostGame.cs" />
@@ -90,6 +92,7 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ChromaticAberrationShader.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\GlobalFog.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Luminance.shader" />
+     <None Include="Assets\Meshes\Materials\alpha transparent.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionSelective.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\Bokeh34.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlurDX11.shader" />
@@ -98,6 +101,7 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlur.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\DLAA.shader" />
+     <None Include="Assets\ShaderExample\Wireframe.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseAndGrainDX11.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BrightPassFilter2.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableBlur.shader" />
