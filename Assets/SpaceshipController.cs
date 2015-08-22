@@ -4,9 +4,9 @@ using UnityEngine.Networking;
 public class SpaceshipController : NetworkBehaviour {
 
 	float vel = 0.0f;
-	float accel = 1000.0f;
+	float accel = 100.0f;
 	float deccel = 0.98f;
-	float maxVel = 1000.0f;
+	float maxVel = 100.0f;
 	float finalVel = 0;
 
 	float sideVel = 0.0f;
