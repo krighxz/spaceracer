@@ -50,7 +50,11 @@
      <Compile Include="Assets\BgEnvironmentController.cs" />
      <Compile Include="Assets\CameraEffectController.cs" />
      <Compile Include="Assets\FPSDisplay.cs" />
+     <Compile Include="Assets\FreeLook.cs" />
+     <Compile Include="Assets\LaserManager.cs" />
+     <Compile Include="Assets\LaserMove.cs" />
      <Compile Include="Assets\ParticleGenerator.cs" />
+     <Compile Include="Assets\PlanetOrbit.cs" />
      <Compile Include="Assets\SpaceshipController.cs" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
