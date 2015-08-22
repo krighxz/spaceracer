@@ -27,9 +27,19 @@ public class FreeLook : MonoBehaviour {
 	
 	public float minimumY = -60F;
 	public float maximumY = 60F;
-	
+	Transform myShip;
 	float rotationY = 0F;
-	
+
+	void Start ()
+	{
+		//if(!networkView.isMine)
+		//enabled = false;
+		myShip = transform.parent;//GameObject.Find ("SpaceshipPrefab
+		// Make the rigid body not change rotation
+		//if (rigidbody)
+		//rigidbody.freezeRotation = true;
+	}
+
 	void Update ()
 	{
 		if (axes == RotationAxes.MouseXAndY)
@@ -55,7 +65,7 @@ public class FreeLook : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown (0)) {
 			//spawn lazor
-			GameObject l = Instantiate(Resources.Load ("lazorColl"), this.transform.position - this.transform.up*4.0f,this.transform.rotation) as GameObject;
+			GameObject l = Instantiate(Resources.Load ("lazorColl"), myShip.position - myShip.up*0.0f,this.transform.rotation) as GameObject;
 			//raycast
 			Vector3 forwardPoint = this.transform.position + this.transform.forward*1000.0f;
 			l.transform.LookAt(forwardPoint);
@@ -64,13 +74,5 @@ public class FreeLook : MonoBehaviour {
 		}
 	}
 	
-	void Start ()
-	{
-		//if(!networkView.isMine)
-		//enabled = false;
-		
-		// Make the rigid body not change rotation
-		//if (rigidbody)
-		//rigidbody.freezeRotation = true;
-	}
+
 }

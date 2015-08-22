@@ -51,6 +51,7 @@
      <Compile Include="Assets\CameraEffectController.cs" />
      <Compile Include="Assets\FPSDisplay.cs" />
      <Compile Include="Assets\FreeLook.cs" />
+     <Compile Include="Assets\HostGame.cs" />
      <Compile Include="Assets\LaserManager.cs" />
      <Compile Include="Assets\LaserMove.cs" />
      <Compile Include="Assets\ParticleGenerator.cs" />

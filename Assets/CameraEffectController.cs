@@ -4,12 +4,14 @@ using UnityStandardAssets.ImageEffects;
 
 [RequireComponent (typeof (MotionBlur))]
 [RequireComponent (typeof (Fisheye))]
-[RequireComponent (typeof (SpaceshipController))]
+[RequireComponent (typeof (DepthOfField))]
 public class CameraEffectController : MonoBehaviour {
+
+	//public GameObject parentSpaceship;
+	SpaceshipController spaceshipController;
 
 	MotionBlur motionBlurFilter;
 	Fisheye fisheye;
-	SpaceshipController spaceshipController;
 	DepthOfField depthOfField;
 
 	// Use this for initialization
@@ -17,7 +19,7 @@ public class CameraEffectController : MonoBehaviour {
 
 		motionBlurFilter = GetComponent<MotionBlur>();
 		fisheye = GetComponent<Fisheye>();
-		spaceshipController = GetComponent<SpaceshipController>();
+		spaceshipController = transform.parent.GetComponent<SpaceshipController>();
 		depthOfField = GetComponent<DepthOfField>();
 
 	}
