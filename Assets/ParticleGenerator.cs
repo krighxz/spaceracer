@@ -25,6 +25,8 @@ public class ParticleGenerator : MonoBehaviour {
 		particles = new GameObject[maxParticles];
 		cam = Camera.main;
 
+		Debug.Log ("Camera is: " + cam);
+
 		for(int p=0;p<maxParticles;p++)	{
 			particles[p] = Instantiate (particle) as GameObject;
 			placeParticleRandomly(p);

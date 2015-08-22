@@ -30,7 +30,7 @@ public class FreeLook : MonoBehaviour {
 	Transform myShip;
 	float rotationY = 0F;
 
-	AudioSource laserFireSound;
+//	AudioSource laserFireSound;
 
 	void Start ()
 	{
@@ -40,7 +40,7 @@ public class FreeLook : MonoBehaviour {
 		// Make the rigid body not change rotation
 		//if (rigidbody)
 		//rigidbody.freezeRotation = true;
-		laserFireSound = GameObject.Find ("laserFire").GetComponent<AudioSource> ();
+//		laserFireSound = GameObject.Find ("laserFire").GetComponent<AudioSource> ();
 	}
 
 	void Update ()
@@ -66,21 +66,21 @@ public class FreeLook : MonoBehaviour {
 			transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
 		}
 
-		if (Input.GetMouseButtonDown (0)) {
-			//spawn lazor
-			GameObject l = Instantiate(Resources.Load ("lazorColl"), myShip.position - myShip.up*0.0f,this.transform.rotation) as GameObject;
-			//raycast
-			Vector3 forwardPoint = this.transform.position + this.transform.forward*1000.0f;
-			l.transform.LookAt(forwardPoint);
-			l.GetComponent<LaserMove>().setInitialVelocityMagnitude( GetComponentInParent<SpaceshipController>().getFinalVelocity());
-
-			laserFireSound.pitch = Random.value + 0.5f;
-			laserFireSound.Play();
-
-			//pew pew!
-
-
-		}
+//		if (Input.GetMouseButtonDown (0)) {
+//			//spawn lazor
+//			GameObject l = Instantiate(Resources.Load ("lazorColl"), myShip.position - myShip.up*0.0f,this.transform.rotation) as GameObject;
+//			//raycast
+//			Vector3 forwardPoint = this.transform.position + this.transform.forward*1000.0f;
+//			l.transform.LookAt(forwardPoint);
+//			l.GetComponent<LaserMove>().setInitialVelocityMagnitude( GetComponentInParent<SpaceshipController>().getFinalVelocity());
+//
+//			laserFireSound.pitch = Random.value + 0.5f;
+//			laserFireSound.Play();
+//
+//			//pew pew!
+//
+//
+//		}
 	}
 	
 

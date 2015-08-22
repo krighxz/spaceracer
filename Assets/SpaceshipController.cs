@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class SpaceshipController : MonoBehaviour {
+using UnityEngine.Networking;
+public class SpaceshipController : NetworkBehaviour {
 
 	float vel = 0.0f;
 	float accel = 1000.0f;
@@ -21,82 +21,84 @@ public class SpaceshipController : MonoBehaviour {
 	AudioSource engineSound;
 	AudioSource engineBeep;
 
-	
+
 	// Use this for initialization
-	void Awake () {
+	void Start () {
+
+
 		engineSound = GameObject.Find ("engineSound").GetComponent<AudioSource> ();
 		engineBeep = GameObject.Find ("engineBeep").GetComponent<AudioSource> ();
 
+		if (isLocalPlayer) {
+			Camera.main.transform.position = transform.position - new Vector3(0,-5,5);
+			Camera.main.transform.SetParent(transform);
+		}
 	}
 
 
 	// Update is called once per frame
 	void FixedUpdate () {
 
-//		if(Input.GetKeyDown("w") && vel <= 100 && vel >= -100)	{
-//			vel += 300;
-//		}
+		if (isLocalPlayer) {
 
-		// BOOST
+			boost = false;
+			if (Input.GetKey (KeyCode.Space)) {
+				boost = true;
+				boostVel += boostAccel;
+			}
 
-		boost = false;
-		if(Input.GetKey (KeyCode.Space))	{
-			boost = true;
-			boostVel += boostAccel;
-		}
+			boostVel *= boostDeccel;
 
-		boostVel *= boostDeccel;
+			// FORWARD / BACKWARD MVMT
 
-		// FORWARD / BACKWARD MVMT
+			if (Input.GetKey ("w")) {
+				vel += Time.deltaTime * accel;
+			} else if (Input.GetKey ("s")) {
+				vel -= Time.deltaTime * accel;
+			} else {
+				vel *= deccel;
+			}
 
-		if(Input.GetKey ("w"))	{
-			vel += Time.deltaTime * accel;
-		} else if(Input.GetKey ("s"))	{
-			vel -= Time.deltaTime * accel;
-		} else {
-			vel *= deccel;
-		}
+			if (vel >= maxVel)
+				vel = maxVel;
+			if (vel <= maxVel * -1.0f)
+				vel = maxVel * -1.0f;
 
-		if(vel>=maxVel)
-			vel = maxVel;
-		if(vel<=maxVel*-1.0f)
-			vel = maxVel * -1.0f;
+			finalVel = (vel + boostVel * (vel / maxVel));
 
-		finalVel = (vel + boostVel * (vel / maxVel));
+			engineSound.volume = finalVel / 1000f;
+			engineSound.pitch = finalVel / 200f + 0.5f;
+			transform.Translate (transform.forward * Time.deltaTime * finalVel);
 
-		engineSound.volume = finalVel / 1000f;
-		engineSound.pitch = finalVel / 200f + 0.5f;
-		transform.Translate(transform.forward*Time.deltaTime*finalVel);
+			engineBeep.volume = Mathf.Pow (finalVel / 2500f, 2f);
+			engineBeep.pitch = finalVel / 500f + 0.5f;
+			transform.Translate (transform.forward * Time.deltaTime * finalVel);
 
-		engineBeep.volume = Mathf.Pow(finalVel / 2500f,2f);
-		engineBeep.pitch = finalVel / 500f + 0.5f;
-		transform.Translate(transform.forward*Time.deltaTime*finalVel);
+			// SIDE MVMT
 
-		// SIDE MVMT
+			if (Input.GetKey ("d")) {
+				sideVel += Time.deltaTime * sideAccel;
+			}
+			if (Input.GetKey ("a")) {
+				sideVel -= Time.deltaTime * sideAccel;
+			}
 
-		if(Input.GetKey ("d"))	{
-			sideVel += Time.deltaTime * sideAccel;
-		}
-		if(Input.GetKey ("a"))	{
-			sideVel -= Time.deltaTime * sideAccel;
-		}
+			sideVel *= sideDeccel;
 
-		sideVel *= sideDeccel;
+			float maxSideVel = 1000;
 
-		float maxSideVel = 1000;
-
-		if(sideVel>=maxSideVel)
-			sideVel = maxSideVel;
-		if(sideVel<=maxSideVel * -1.0f)
-			sideVel = maxSideVel * -1.0f;
+			if (sideVel >= maxSideVel)
+				sideVel = maxSideVel;
+			if (sideVel <= maxSideVel * -1.0f)
+				sideVel = maxSideVel * -1.0f;
 
 
 //		transform.Translate (transform.right * Time.deltaTime * sideVel);
 
-		transform.Translate ( Vector3.right * Time.deltaTime * sideVel, Space.World);
+			transform.Translate (Vector3.right * Time.deltaTime * sideVel, Space.World);
 
-		transform.rotation = Quaternion.Euler(0,0,sideVel/maxSideVel * -60.0f);
-
+			transform.rotation = Quaternion.Euler (0, 0, sideVel / maxSideVel * -60.0f);
+		}
 	}
 
 	public bool isBoosting()	{
