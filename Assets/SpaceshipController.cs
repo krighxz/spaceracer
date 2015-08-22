@@ -7,6 +7,7 @@ public class SpaceshipController : MonoBehaviour {
 	float accel = 1000.0f;
 	float deccel = 0.98f;
 	float maxVel = 1000.0f;
+	float finalVel = 0;
 
 	float sideVel = 0.0f;
 	float sideAccel = 1000.0f;
@@ -17,11 +18,18 @@ public class SpaceshipController : MonoBehaviour {
 	float boostDeccel = 0.9f;
 	bool boost = false;
 
+	AudioSource engineSound;
+	AudioSource engineBeep;
+
+	
 	// Use this for initialization
 	void Awake () {
-	
+		engineSound = GameObject.Find ("engineSound").GetComponent<AudioSource> ();
+		engineBeep = GameObject.Find ("engineBeep").GetComponent<AudioSource> ();
+
 	}
-	
+
+
 	// Update is called once per frame
 	void FixedUpdate () {
 
@@ -54,7 +62,15 @@ public class SpaceshipController : MonoBehaviour {
 		if(vel<=maxVel*-1.0f)
 			vel = maxVel * -1.0f;
 
-		transform.Translate(transform.forward*Time.deltaTime*(vel+boostVel*(vel/maxVel)));
+		finalVel = (vel + boostVel * (vel / maxVel));
+
+		engineSound.volume = finalVel / 1000f;
+		engineSound.pitch = finalVel / 200f + 0.5f;
+		transform.Translate(transform.forward*Time.deltaTime*finalVel);
+
+		engineBeep.volume = Mathf.Pow(finalVel / 2500f,2f);
+		engineBeep.pitch = finalVel / 500f + 0.5f;
+		transform.Translate(transform.forward*Time.deltaTime*finalVel);
 
 		// SIDE MVMT
 
@@ -90,6 +106,10 @@ public class SpaceshipController : MonoBehaviour {
 	public float getBoostVelNormalized()	{
 		return (boostVel*(vel/maxVel))/1000.0f;
 //		return boostVel / 1000.0f;
+	}
+
+	public float getFinalVelocity()	{
+		return finalVel;
 	}
 
 }

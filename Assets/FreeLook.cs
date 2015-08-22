@@ -30,6 +30,8 @@ public class FreeLook : MonoBehaviour {
 	Transform myShip;
 	float rotationY = 0F;
 
+	AudioSource laserFireSound;
+
 	void Start ()
 	{
 		//if(!networkView.isMine)
@@ -38,6 +40,7 @@ public class FreeLook : MonoBehaviour {
 		// Make the rigid body not change rotation
 		//if (rigidbody)
 		//rigidbody.freezeRotation = true;
+		laserFireSound = GameObject.Find ("laserFire").GetComponent<AudioSource> ();
 	}
 
 	void Update ()
@@ -69,7 +72,13 @@ public class FreeLook : MonoBehaviour {
 			//raycast
 			Vector3 forwardPoint = this.transform.position + this.transform.forward*1000.0f;
 			l.transform.LookAt(forwardPoint);
-			//l.transform.position+=l.transform.forward*10f;
+			l.GetComponent<LaserMove>().setInitialVelocityMagnitude( GetComponentInParent<SpaceshipController>().getFinalVelocity());
+
+			laserFireSound.pitch = Random.value + 0.5f;
+			laserFireSound.Play();
+
+			//pew pew!
+
 
 		}
 	}
